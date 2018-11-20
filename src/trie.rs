@@ -421,6 +421,21 @@ impl Break for [u8; 15] {
     }
 }
 
+impl Break for Vec<u8> {
+    type Split = [u8];
+
+
+    #[inline]
+    fn empty<'a>() -> &'a [u8] {
+        <&'a [u8]>::default()
+    }
+
+
+    #[inline]
+    fn find_break(&self, loc: usize) -> &[u8] {
+        &self[..loc]
+    }
+}
 
 impl<'b> Break for &'b [u8] {
     type Split = [u8];
